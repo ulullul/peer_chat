@@ -1,3 +1,0 @@
-class KeySeedException implements Exception {
-  
-}
