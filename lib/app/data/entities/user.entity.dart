@@ -17,6 +17,7 @@ class User with _$User {
     required String fullName,
     required String username,
     required String password,
+    @Default(false) bool isConnected,
   }) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);

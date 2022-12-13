@@ -16,17 +16,19 @@ class SplashController extends BaseController {
   void _init() async {
     await initDependencies();
     final passwordStorage = Get.find<PasswordStorage>();
-    if(!(await passwordStorage.isPasswordSet())) {
+    if (!(await passwordStorage.isPasswordSet())) {
       return _goToNextRoute(Routes.AUTH);
     }
-    await Get.putAsync<Database>(() async => await AppDatabase.instance.database);
-    return _goToNextRoute(Routes.CHAT);
+    await Get.putAsync<Database>(
+      () async => await AppDatabase.instance.database,
+      permanent: true,
+    );
+    return _goToNextRoute(Routes.ALL_CHATS);
   }
 
   void _goToNextRoute(String route) {
     Get.offNamed(route);
   }
-
 
   Future<void> initDependencies() async {
     Get.lazyPut<SecureStorageProvider>(() => SecureStorageProvider().init());

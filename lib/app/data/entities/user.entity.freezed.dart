@@ -24,6 +24,7 @@ mixin _$User {
   String get fullName => throw _privateConstructorUsedError;
   String get username => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
+  bool get isConnected => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +36,12 @@ abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
       _$UserCopyWithImpl<$Res, User>;
   @useResult
-  $Res call({String id, String fullName, String username, String password});
+  $Res call(
+      {String id,
+      String fullName,
+      String username,
+      String password,
+      bool isConnected});
 }
 
 /// @nodoc
@@ -55,6 +61,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? fullName = null,
     Object? username = null,
     Object? password = null,
+    Object? isConnected = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -73,6 +80,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
+      isConnected: null == isConnected
+          ? _value.isConnected
+          : isConnected // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -83,7 +94,12 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       __$$_UserCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String fullName, String username, String password});
+  $Res call(
+      {String id,
+      String fullName,
+      String username,
+      String password,
+      bool isConnected});
 }
 
 /// @nodoc
@@ -99,6 +115,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
     Object? fullName = null,
     Object? username = null,
     Object? password = null,
+    Object? isConnected = null,
   }) {
     return _then(_$_User(
       id: null == id
@@ -117,6 +134,10 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
+      isConnected: null == isConnected
+          ? _value.isConnected
+          : isConnected // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -128,7 +149,8 @@ class _$_User extends _User with DiagnosticableTreeMixin {
       {required this.id,
       required this.fullName,
       required this.username,
-      required this.password})
+      required this.password,
+      this.isConnected = false})
       : super._();
 
   factory _$_User.fromJson(Map<String, dynamic> json) => _$$_UserFromJson(json);
@@ -141,10 +163,13 @@ class _$_User extends _User with DiagnosticableTreeMixin {
   final String username;
   @override
   final String password;
+  @override
+  @JsonKey()
+  final bool isConnected;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'User(id: $id, fullName: $fullName, username: $username, password: $password)';
+    return 'User(id: $id, fullName: $fullName, username: $username, password: $password, isConnected: $isConnected)';
   }
 
   @override
@@ -155,7 +180,8 @@ class _$_User extends _User with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('fullName', fullName))
       ..add(DiagnosticsProperty('username', username))
-      ..add(DiagnosticsProperty('password', password));
+      ..add(DiagnosticsProperty('password', password))
+      ..add(DiagnosticsProperty('isConnected', isConnected));
   }
 
   @override
@@ -169,13 +195,15 @@ class _$_User extends _User with DiagnosticableTreeMixin {
             (identical(other.username, username) ||
                 other.username == username) &&
             (identical(other.password, password) ||
-                other.password == password));
+                other.password == password) &&
+            (identical(other.isConnected, isConnected) ||
+                other.isConnected == isConnected));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, fullName, username, password);
+      Object.hash(runtimeType, id, fullName, username, password, isConnected);
 
   @JsonKey(ignore: true)
   @override
@@ -196,7 +224,8 @@ abstract class _User extends User {
       {required final String id,
       required final String fullName,
       required final String username,
-      required final String password}) = _$_User;
+      required final String password,
+      final bool isConnected}) = _$_User;
   const _User._() : super._();
 
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
@@ -209,6 +238,8 @@ abstract class _User extends User {
   String get username;
   @override
   String get password;
+  @override
+  bool get isConnected;
   @override
   @JsonKey(ignore: true)
   _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;
