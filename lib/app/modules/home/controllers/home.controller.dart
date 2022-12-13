@@ -24,8 +24,8 @@ class HomeController extends GetxController {
   }
 
   void initDB() async {
-    print(await usersDao.getAll());
-}
+    print(await usersDao.getUser());
+  }
 
   init() async {
     await nearbyService.init(

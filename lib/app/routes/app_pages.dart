@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import '../modules/auth/bindings/auth.binding.dart';
 import '../modules/auth/views/auth.view.dart';
+import '../modules/chat/bindings/chat.binding.dart';
+import '../modules/chat/views/chat.view.dart';
 import '../modules/home/bindings/home.binding.dart';
 import '../modules/home/views/home.view.dart';
 import '../modules/splash/bindings/splash.binding.dart';
@@ -29,6 +31,11 @@ class AppPages {
       name: _Paths.SPLASH,
       page: () => const SplashView(),
       binding: SplashBinding(),
+    ),
+    GetPage(
+      name: _Paths.CHAT,
+      page: () => const ChatView(),
+      binding: ChatBinding(),
     ),
   ];
 }

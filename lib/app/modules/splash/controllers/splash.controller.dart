@@ -20,7 +20,7 @@ class SplashController extends BaseController {
       return _goToNextRoute(Routes.AUTH);
     }
     await Get.putAsync<Database>(() async => await AppDatabase.instance.database);
-    return _goToNextRoute(Routes.HOME);
+    return _goToNextRoute(Routes.CHAT);
   }
 
   void _goToNextRoute(String route) {
