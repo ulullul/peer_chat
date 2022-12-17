@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:peer_chat/app/data/entities/user.entity.dart';
 
 class AllChatsController extends GetxController {
-  final users = [
+  final users1 = [
     const User(
       id: '1',
       fullName: 'Pavlo Hubin',
@@ -31,7 +31,12 @@ class AllChatsController extends GetxController {
     ),
   ];
 
-  final count = 0.obs;
+  final users = <User>[].obs;
+
+  void addUser(User user) {
+    users.add(user);
+  }
+
   @override
   void onInit() {
     super.onInit();
@@ -46,6 +51,4 @@ class AllChatsController extends GetxController {
   void onClose() {
     super.onClose();
   }
-
-  void increment() => count.value++;
 }

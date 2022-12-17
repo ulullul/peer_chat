@@ -47,6 +47,7 @@ class AppDatabase {
     var codec = getEncryptSembastCodec(password: (await passwordStorage.readPassword())!);
     // Get a platform-specific directory where persistent app data can be stored
     final appDocumentDir = await getApplicationDocumentsDirectory();
+    print(appDocumentDir);
     // Path with the form: /platform-specific-directory/chat.db
     final dbPath = join(appDocumentDir.path, 'chat.db');
 

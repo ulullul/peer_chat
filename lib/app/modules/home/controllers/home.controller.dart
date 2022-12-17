@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter_nearby_connections/flutter_nearby_connections.dart';
 import 'package:get/get.dart';
 import 'package:peer_chat/app/data/database/daos/user.dao.dart';
+import 'package:peer_chat/app/data/entities/user.entity.dart';
 import 'package:uuid/uuid.dart';
 
 class HomeController extends GetxController {
@@ -27,28 +28,23 @@ class HomeController extends GetxController {
     print(await usersDao.getUser());
   }
 
-  init() async {
-    await nearbyService.init(
-        serviceType: 'mpconn',
-        deviceName: const Uuid().v4(),
-        strategy: Strategy.P2P_CLUSTER,
-        callback: (isRunning) async {
-          print('isRunning: $isRunning');
-          /*if (isRunning) {
-            if (widget.deviceType == DeviceType.browser) {
+  final user = const User(
+    id: '1',
+    fullName: 'Pavlo Hubin',
+    username: 'phubin',
+    password: 'phubin',
+    isConnected: true,
+  );
 
-              await nearbyService.stopBrowsingForPeers();
-              await Future.delayed(Duration(microseconds: 200));
-              await nearbyService.startBrowsingForPeers();
-            } else {
-              await nearbyService.stopAdvertisingPeer();
-              await nearbyService.stopBrowsingForPeers();
-              await Future.delayed(Duration(microseconds: 200));
-              await nearbyService.startAdvertisingPeer();
-              await nearbyService.startBrowsingForPeers();
-            }
-          }*/
-        });
+  init() async {
+
+    await nearbyService.init(
+      serviceType: 'mpconn',
+      deviceName: user.fullName,
+      uuid: user.uuid,
+      strategy: Strategy.P2P_CLUSTER,
+      callback: (isRunning) async {},
+    );
 
     devicesSubscription =
         nearbyService.stateChangedSubscription(callback: (devicesList) {
@@ -79,8 +75,8 @@ class HomeController extends GetxController {
     );
   }
 
-  void sendData(Device device) => nearbyService.sendMessage(device.deviceId, 'hello');
-
+  void sendData(Device device) =>
+      nearbyService.sendMessage(device.deviceId, 'hello');
 
   @override
   void onReady() {
@@ -91,7 +87,6 @@ class HomeController extends GetxController {
   void onClose() {
     super.onClose();
   }
-
 }
 
 /*void keys() async {

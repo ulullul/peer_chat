@@ -1,23 +1,31 @@
+import 'dart:convert';
+
 import 'package:get/get.dart';
+import 'package:peer_chat/app/data/database/daos/user.dao.dart';
+import 'package:peer_chat/app/data/entities/user.entity.dart';
+import 'package:sembast/sembast.dart';
+import 'package:sembast/utils/sembast_import_export.dart';
 
 class SettingsController extends GetxController {
-  //TODO: Implement SettingsController
+  final _userDao = UserDao();
+  final user = Rxn<User>();
+  final _db = Get.find<Database>();
 
   final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
+    _getUser();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
+  Future<void> _getUser() async {
+    user.value = await _userDao.getUser();
   }
 
-  @override
-  void onClose() {
-    super.onClose();
+  Future<void> export() async {
+    var content = await exportDatabase(_db);
+// Save as text
+    var saved = jsonEncode(content);
+    print(saved);
   }
-
-  void increment() => count.value++;
 }

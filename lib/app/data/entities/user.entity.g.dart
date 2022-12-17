@@ -11,6 +11,7 @@ _$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
       fullName: json['fullName'] as String,
       username: json['username'] as String,
       password: json['password'] as String,
+      uuid: json['uuid'] as String?,
       isConnected: json['isConnected'] as bool? ?? false,
     );
 
@@ -19,5 +20,6 @@ Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
       'fullName': instance.fullName,
       'username': instance.username,
       'password': instance.password,
+      'uuid': instance.uuid,
       'isConnected': instance.isConnected,
     };

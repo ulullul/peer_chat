@@ -574,6 +574,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.14.0"
+  pick_or_save:
+    dependency: "direct main"
+    description:
+      name: pick_or_save
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.2.4"
   platform:
     dependency: transitive
     description:

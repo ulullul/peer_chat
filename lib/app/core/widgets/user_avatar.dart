@@ -4,7 +4,13 @@ import 'package:peer_chat/app/data/entities/user.entity.dart';
 
 class UserAvatar extends StatelessWidget {
   final User user;
-  const UserAvatar({Key? key, required this. user}) : super(key: key);
+  const UserAvatar({
+    Key? key,
+    required this.user,
+    this.fontSize,
+  }) : super(key: key);
+
+  final double? fontSize;
 
   String getInitials(User user) {
     final splitted = user.fullName.split(' ');
@@ -17,14 +23,13 @@ class UserAvatar extends StatelessWidget {
       margin: const EdgeInsets.only(right: 8),
       child: GestureDetector(
         child: CircleAvatar(
-          backgroundColor:   const Color(0xfff5a2d9),
+          backgroundColor: const Color(0xfff5a2d9),
           radius: 16,
-          child:Text(
+          child: Text(
             getInitials(user),
-            style:
-            const TextStyle(
+            style: TextStyle(
               color: Colors.white,
-              fontSize: 12,
+              fontSize: fontSize ?? 12,
               fontWeight: FontWeight.w800,
               height: 1.333,
             ),

@@ -24,6 +24,7 @@ mixin _$User {
   String get fullName => throw _privateConstructorUsedError;
   String get username => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
+  String? get uuid => throw _privateConstructorUsedError;
   bool get isConnected => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -41,6 +42,7 @@ abstract class $UserCopyWith<$Res> {
       String fullName,
       String username,
       String password,
+      String? uuid,
       bool isConnected});
 }
 
@@ -61,6 +63,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? fullName = null,
     Object? username = null,
     Object? password = null,
+    Object? uuid = freezed,
     Object? isConnected = null,
   }) {
     return _then(_value.copyWith(
@@ -80,6 +83,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
+      uuid: freezed == uuid
+          ? _value.uuid
+          : uuid // ignore: cast_nullable_to_non_nullable
+              as String?,
       isConnected: null == isConnected
           ? _value.isConnected
           : isConnected // ignore: cast_nullable_to_non_nullable
@@ -99,6 +106,7 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       String fullName,
       String username,
       String password,
+      String? uuid,
       bool isConnected});
 }
 
@@ -115,6 +123,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
     Object? fullName = null,
     Object? username = null,
     Object? password = null,
+    Object? uuid = freezed,
     Object? isConnected = null,
   }) {
     return _then(_$_User(
@@ -134,6 +143,10 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
+      uuid: freezed == uuid
+          ? _value.uuid
+          : uuid // ignore: cast_nullable_to_non_nullable
+              as String?,
       isConnected: null == isConnected
           ? _value.isConnected
           : isConnected // ignore: cast_nullable_to_non_nullable
@@ -150,6 +163,7 @@ class _$_User extends _User with DiagnosticableTreeMixin {
       required this.fullName,
       required this.username,
       required this.password,
+      this.uuid,
       this.isConnected = false})
       : super._();
 
@@ -164,12 +178,14 @@ class _$_User extends _User with DiagnosticableTreeMixin {
   @override
   final String password;
   @override
+  final String? uuid;
+  @override
   @JsonKey()
   final bool isConnected;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'User(id: $id, fullName: $fullName, username: $username, password: $password, isConnected: $isConnected)';
+    return 'User(id: $id, fullName: $fullName, username: $username, password: $password, uuid: $uuid, isConnected: $isConnected)';
   }
 
   @override
@@ -181,6 +197,7 @@ class _$_User extends _User with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('fullName', fullName))
       ..add(DiagnosticsProperty('username', username))
       ..add(DiagnosticsProperty('password', password))
+      ..add(DiagnosticsProperty('uuid', uuid))
       ..add(DiagnosticsProperty('isConnected', isConnected));
   }
 
@@ -196,14 +213,15 @@ class _$_User extends _User with DiagnosticableTreeMixin {
                 other.username == username) &&
             (identical(other.password, password) ||
                 other.password == password) &&
+            (identical(other.uuid, uuid) || other.uuid == uuid) &&
             (identical(other.isConnected, isConnected) ||
                 other.isConnected == isConnected));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, fullName, username, password, isConnected);
+  int get hashCode => Object.hash(
+      runtimeType, id, fullName, username, password, uuid, isConnected);
 
   @JsonKey(ignore: true)
   @override
@@ -225,6 +243,7 @@ abstract class _User extends User {
       required final String fullName,
       required final String username,
       required final String password,
+      final String? uuid,
       final bool isConnected}) = _$_User;
   const _User._() : super._();
 
@@ -238,6 +257,8 @@ abstract class _User extends User {
   String get username;
   @override
   String get password;
+  @override
+  String? get uuid;
   @override
   bool get isConnected;
   @override

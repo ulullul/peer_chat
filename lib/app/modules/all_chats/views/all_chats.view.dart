@@ -29,10 +29,18 @@ class AllChatsView extends GetView<AllChatsController> {
           ),
         ),
         centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () => Get.toNamed(Routes.SETTINGS),
+            icon: Icon(
+              Icons.settings,
+            ),
+          ),
+        ],
       ),
       body: ListView.separated(
         itemBuilder: (_, index) {
-          final user = controller.users[index];
+          final user = controller.users1[index];
           return ListTile(
             leading: UserAvatar(
               user: user,
@@ -74,7 +82,7 @@ class AllChatsView extends GetView<AllChatsController> {
           height: 1,
           color: Colors.grey.shade400,
         ),
-        itemCount: controller.users.length,
+        itemCount: controller.users1.length,
       ),
     );
   }

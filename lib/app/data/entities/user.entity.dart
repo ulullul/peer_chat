@@ -17,6 +17,7 @@ class User with _$User {
     required String fullName,
     required String username,
     required String password,
+    String? uuid,
     @Default(false) bool isConnected,
   }) = _User;
 
