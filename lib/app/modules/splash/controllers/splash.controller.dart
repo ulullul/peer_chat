@@ -23,7 +23,7 @@ class SplashController extends BaseController {
       () async => await AppDatabase.instance.database,
       permanent: true,
     );
-    return _goToNextRoute(Routes.SETTINGS);
+    return _goToNextRoute(Routes.HOME);
   }
 
   void _goToNextRoute(String route) {

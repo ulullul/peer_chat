@@ -1,6 +1,8 @@
+import 'package:cryptography/cryptography.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:peer_chat/app/core/widgets/drawer.dart';
 
 import '../controllers/home.controller.dart';
 
@@ -9,52 +11,82 @@ class HomeView extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    controller;
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('HomeView'),
-        centerTitle: true,
-      ),
-      body: Center(
-        child: Column(
-          children: [
-            OutlinedButton(
-              onPressed: controller.startBrowsing,
-              child: Text('Browse'),
-            ),
-            OutlinedButton(
-              onPressed: controller.startAdvertising,
-              child: Text('Advertise'),
-            ),
-            ObxValue(
-              (devices) => ListView.separated(
-                shrinkWrap: true,
-                itemBuilder: (_, index) {
-                  final device = devices.value[index];
-                  return ListTile(
-                    title: Text(device.deviceId),
-
-                    leading: IconButton(
-                      icon: Icon(Icons.send),
-                      onPressed: () => controller.sendData(device),
-                    ),
-                    trailing: IconButton(
-                      icon: Icon(Icons.connect_without_contact),
-                      onPressed: () => controller.connectToDevice(device),
-                    ),
-                  );
-                },
-                separatorBuilder: (_, __) => Container(
-                  width: 1,
-                  height: 1,
-                  color: Colors.black,
-                ),
-                itemCount: devices.value.length,
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        drawer: Obx(() {
+          if (controller.user.value == null) return const SizedBox();
+          return AppDrawer(user: controller.user.value!);
+        }),
+        appBar: AppBar(
+          title: const Text('All Chats'),
+          centerTitle: true,
+          bottom: TabBar(
+            tabs: [
+              Tab(
+                icon: Icon(Icons.add_ic_call_outlined),
+                text: 'All',
               ),
-              controller.devices,
-            ),
+              Tab(
+                icon: Icon(Icons.done_all),
+                text: 'Approved',
+              ),
+            ],
+          ),
+        ),
+        body: TabBarView(
+          children: [
+            _buildAll(),
+            _buildAll(),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildAll() {
+    return Center(
+      child: Column(
+        children: [
+          /*OutlinedButton(
+            onPressed: controller.startBrowsing,
+            child: const Text('Browse'),
+          ),
+          OutlinedButton(
+            onPressed: controller.startAdvertising,
+            child: const Text('Advertise'),
+          ),*/
+          ObxValue(
+            (devices) => ListView.separated(
+              shrinkWrap: true,
+              itemBuilder: (_, index) {
+                final device = devices[index];
+                return ListTile(
+                  title: Text(device.user.fullName),
+                  onLongPress: () => controller.showUserBottomsheet(device.user.uuid),
+                  leading: IconButton(
+                    icon: const Icon(Icons.send),
+                    onPressed: () => controller.sendData(
+                      device.device.deviceId,
+                      'message',
+                    ),
+                  ),
+                  /*trailing: IconButton(
+                    icon: const Icon(Icons.connect_without_contact),
+                    onPressed: () => controller.connectToDevice(device.device),
+                  ),*/
+                );
+              },
+              separatorBuilder: (_, __) => Container(
+                width: 1,
+                height: 1,
+                color: Colors.black,
+              ),
+              itemCount: devices.value.length,
+            ),
+            controller.devices,
+          ),
+        ],
       ),
     );
   }

@@ -50,6 +50,14 @@ class SettingsView extends GetView<SettingsController> {
                 'Export account',
               ),
             ),
+            const SizedBox(height: 20),
+            ElevatedButton.icon(
+              onPressed: controller.seeUserId,
+              icon: const Icon(Icons.perm_identity),
+              label: const Text(
+                'See user id',
+              ),
+            ),
           ],
         ),
       ),

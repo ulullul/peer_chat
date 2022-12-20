@@ -24,6 +24,7 @@ mixin _$User {
   String get fullName => throw _privateConstructorUsedError;
   String get username => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
+  String? get keyPairData => throw _privateConstructorUsedError;
   String? get uuid => throw _privateConstructorUsedError;
   bool get isConnected => throw _privateConstructorUsedError;
 
@@ -42,6 +43,7 @@ abstract class $UserCopyWith<$Res> {
       String fullName,
       String username,
       String password,
+      String? keyPairData,
       String? uuid,
       bool isConnected});
 }
@@ -63,6 +65,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? fullName = null,
     Object? username = null,
     Object? password = null,
+    Object? keyPairData = freezed,
     Object? uuid = freezed,
     Object? isConnected = null,
   }) {
@@ -83,6 +86,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
+      keyPairData: freezed == keyPairData
+          ? _value.keyPairData
+          : keyPairData // ignore: cast_nullable_to_non_nullable
+              as String?,
       uuid: freezed == uuid
           ? _value.uuid
           : uuid // ignore: cast_nullable_to_non_nullable
@@ -106,6 +113,7 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       String fullName,
       String username,
       String password,
+      String? keyPairData,
       String? uuid,
       bool isConnected});
 }
@@ -123,6 +131,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
     Object? fullName = null,
     Object? username = null,
     Object? password = null,
+    Object? keyPairData = freezed,
     Object? uuid = freezed,
     Object? isConnected = null,
   }) {
@@ -143,6 +152,10 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
+      keyPairData: freezed == keyPairData
+          ? _value.keyPairData
+          : keyPairData // ignore: cast_nullable_to_non_nullable
+              as String?,
       uuid: freezed == uuid
           ? _value.uuid
           : uuid // ignore: cast_nullable_to_non_nullable
@@ -163,6 +176,7 @@ class _$_User extends _User with DiagnosticableTreeMixin {
       required this.fullName,
       required this.username,
       required this.password,
+      this.keyPairData,
       this.uuid,
       this.isConnected = false})
       : super._();
@@ -178,6 +192,8 @@ class _$_User extends _User with DiagnosticableTreeMixin {
   @override
   final String password;
   @override
+  final String? keyPairData;
+  @override
   final String? uuid;
   @override
   @JsonKey()
@@ -185,7 +201,7 @@ class _$_User extends _User with DiagnosticableTreeMixin {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'User(id: $id, fullName: $fullName, username: $username, password: $password, uuid: $uuid, isConnected: $isConnected)';
+    return 'User(id: $id, fullName: $fullName, username: $username, password: $password, keyPairData: $keyPairData, uuid: $uuid, isConnected: $isConnected)';
   }
 
   @override
@@ -197,6 +213,7 @@ class _$_User extends _User with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('fullName', fullName))
       ..add(DiagnosticsProperty('username', username))
       ..add(DiagnosticsProperty('password', password))
+      ..add(DiagnosticsProperty('keyPairData', keyPairData))
       ..add(DiagnosticsProperty('uuid', uuid))
       ..add(DiagnosticsProperty('isConnected', isConnected));
   }
@@ -213,6 +230,8 @@ class _$_User extends _User with DiagnosticableTreeMixin {
                 other.username == username) &&
             (identical(other.password, password) ||
                 other.password == password) &&
+            (identical(other.keyPairData, keyPairData) ||
+                other.keyPairData == keyPairData) &&
             (identical(other.uuid, uuid) || other.uuid == uuid) &&
             (identical(other.isConnected, isConnected) ||
                 other.isConnected == isConnected));
@@ -220,8 +239,8 @@ class _$_User extends _User with DiagnosticableTreeMixin {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, fullName, username, password, uuid, isConnected);
+  int get hashCode => Object.hash(runtimeType, id, fullName, username, password,
+      keyPairData, uuid, isConnected);
 
   @JsonKey(ignore: true)
   @override
@@ -243,6 +262,7 @@ abstract class _User extends User {
       required final String fullName,
       required final String username,
       required final String password,
+      final String? keyPairData,
       final String? uuid,
       final bool isConnected}) = _$_User;
   const _User._() : super._();
@@ -257,6 +277,8 @@ abstract class _User extends User {
   String get username;
   @override
   String get password;
+  @override
+  String? get keyPairData;
   @override
   String? get uuid;
   @override

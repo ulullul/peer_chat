@@ -8,9 +8,10 @@ class UserAvatar extends StatelessWidget {
     Key? key,
     required this.user,
     this.fontSize,
+    this.radius = 16,
   }) : super(key: key);
 
-  final double? fontSize;
+  final double? fontSize, radius;
 
   String getInitials(User user) {
     final splitted = user.fullName.split(' ');
@@ -24,7 +25,7 @@ class UserAvatar extends StatelessWidget {
       child: GestureDetector(
         child: CircleAvatar(
           backgroundColor: const Color(0xfff5a2d9),
-          radius: 16,
+          radius: radius,
           child: Text(
             getInitials(user),
             style: TextStyle(

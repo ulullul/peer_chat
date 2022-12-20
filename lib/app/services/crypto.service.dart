@@ -9,16 +9,22 @@ class CryptoService {
 
   static const kNonceLength = 24, kMacLength = 16;
 
-  static Future<Uint8List> encrypt(
+  static Future<Uint8List> encryptConcatenation(
       SecretKey secretKey, String plainText) async {
-    final encrypt = (await kAlgorithm.encrypt(plainText.codeUnits, secretKey: secretKey))
+    final encrypt = (await kAlgorithm.encrypt(plainText.codeUnits, secretKey: secretKey,))
         .concatenation();
+    return encrypt;
+  }
+
+  static Future<SecretBox> encrypt(
+      SecretKey secretKey, String plainText) async {
+    final encrypt = (await kAlgorithm.encrypt(plainText.codeUnits, secretKey: secretKey,));
     return encrypt;
   }
 
   static Future<String> base64Encrypt(
       SecretKey secretKey, String plainText) async {
-    return base64Encode(await encrypt(secretKey, plainText));
+    return base64Encode(await encryptConcatenation(secretKey, plainText));
   }
 
   static Future<Uint8List> decrypt(SecretKey secretKey, Uint8List box) async {

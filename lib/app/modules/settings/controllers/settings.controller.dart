@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:peer_chat/app/data/database/daos/user.dao.dart';
 import 'package:peer_chat/app/data/entities/user.entity.dart';
@@ -27,5 +29,28 @@ class SettingsController extends GetxController {
 // Save as text
     var saved = jsonEncode(content);
     print(saved);
+  }
+
+  Future<void> seeUserId() async {
+    Get.defaultDialog(
+      title: "User id",
+      content: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: SelectableText(user.value!.uuid!,
+                style: const TextStyle(fontSize: 13)),
+          ),
+          IconButton(
+            onPressed: () {
+              Clipboard.setData(
+                ClipboardData(text: user.value!.uuid!),
+              );
+            },
+            icon: const Icon(Icons.content_copy),
+          ),
+        ],
+      ),
+    );
   }
 }

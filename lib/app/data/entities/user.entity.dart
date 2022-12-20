@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
+import 'package:peer_chat/app/data/entities/user_min.entity.dart';
 import 'package:peer_chat/app/services/hash.service.dart';
 
 
@@ -17,6 +18,7 @@ class User with _$User {
     required String fullName,
     required String username,
     required String password,
+    String? keyPairData,
     String? uuid,
     @Default(false) bool isConnected,
   }) = _User;
@@ -29,5 +31,9 @@ class User with _$User {
 
   Future<String> getHashedPassword() async {
     return await HashService.base64Hash(password);
+  }
+
+  UserMinEntity toUserMinEntity() {
+    return UserMinEntity(fullName: fullName, uuid: id,);
   }
 }
